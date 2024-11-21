@@ -7,7 +7,7 @@ urlpatterns = [
     path('register',views.register),
     path('vault',views.vault),
     path('add_files/<id>',views.add_files),
-    path('delete_file',views.delete_file),
+    path('delete_file/<id>',views.delete_file),
     
     
 ]

@@ -56,6 +56,11 @@ def register(req):
 
 def vault(req):
     files=File.objects.filter(user=req.user)
+    # for i in files:
+    #     i.extension=i.file.name.split('.')[-1].lower()
+    #     if i.extension in ['jpg','jpeg','png','gif']:
+    #         file.type='image'
+    #     elif i.extension in ['']
     return render(req,'vault.html',{'files':files})
 
 
@@ -69,12 +74,9 @@ def add_files(req,id):
         return redirect(vault)
     return render(req,'file.html')
 
-def delete_file(req):
-    # if req.method=='POST':
-    #     name=req.POST.get(name)
-    #     print(name)
-    #     file=File.objects.get(name=name,user=req.user)
-    #     file.delete()
+def delete_file(req,id):
+    data = File.objects.get(pk=id)
+    data.delete()
     return redirect(vault)
     
     
