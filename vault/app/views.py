@@ -56,12 +56,14 @@ def register(req):
 
 def vault(req):
     files=File.objects.filter(user=req.user)
-    # for i in files:
-    #     i.extension=i.file.name.split('.')[-1].lower()
-    #     if i.extension in ['jpg','jpeg','png','gif']:
-    #         file.type='image'
-    #     elif i.extension in ['']
-    return render(req,'vault.html',{'files':files})
+    ext_file={'images':[],'videos':[],'pdfs':[]}
+    for i in files:
+        file_name=str(i.file) 
+        if file_name.endswith(('.jpg','.jpeg','.png','.gif',)):
+            ext_file['images'].append(i)
+        elif file_name.endswith(('.pdf')):
+            ext_file['pdfs'].append(i)
+    return render(req,'vault.html',{'ext_file':ext_file,'files':files})
 
 
 def add_files(req,id):
