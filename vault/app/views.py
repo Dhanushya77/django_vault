@@ -58,11 +58,15 @@ def vault(req):
     files=File.objects.filter(user=req.user)
     ext_file={'images':[],'videos':[],'pdfs':[]}
     for i in files:
-        file_name=str(i.file) 
+        file_name=str(i.file).lower()
         if file_name.endswith(('.jpg','.jpeg','.png','.gif',)):
             ext_file['images'].append(i)
+        elif file_name.endswith(('.mov','mp4','mkv')):
+            ext_file['videos'].append(i)
         elif file_name.endswith(('.pdf')):
             ext_file['pdfs'].append(i)
+        else:
+            pass
     return render(req,'vault.html',{'ext_file':ext_file,'files':files})
 
 
